@@ -46,6 +46,9 @@ ENTRY(longjmp)
 	ldr sp,[ip],#4
 	ldr lr,[ip],#4
 	ldmia   ip!, JMP_BUF_REGLIST
+	/* Restore the VFP registers.  */
+	/* Following instruction is vldmia ip!, {d8-d15}.  */
+	ldc	p11, cr8, [r12], #64
 	movs r0,r1
 	moveq r0,#1
 	bx lr
